@@ -178,6 +178,7 @@ stop('Impossible: cross section area too large.'); }
 		flog.info(paste('Current "cat.dist":', cat.dist[1], ',', cat.dist[2]),name='VennDiagramLogger');
 		}
 
+	browser()
 	max.circle.size = 0.2;
 
 	# initialize logical variables to hold special conditions
@@ -244,9 +245,9 @@ stop('Impossible: cross section area too large.'); }
 	if (area1 == area2 & area2 == cross.area) { special.coincidental <- TRUE; }
 	if (cross.area != 0 & (cross.area == area2 | cross.area == area1)) { special.inclusion <- TRUE; }
 	if (0 == cross.area) { special.exclusion <- TRUE; }
-	
+
 	denom <- area1+area2-cross.area;
-	
+
 	wrapLab <- function(num){
 		stri = '';
 		if(print.mode[1] == 'percent'){
@@ -266,13 +267,13 @@ stop('Impossible: cross section area too large.'); }
 		}
 		return(stri);
 	}
-	
+
 #	flog.info(c(area1,area2,cross.area),name='VennDiagramLogger');
-	
+
 #	altCross <- cross.area;
 #	altArea1 <- area1;
 #	altArea2 <- area2;
-	
+
 #	#Do processing on the areas and the cross.area to turn them into the required numbers for printing
 #	if(print.mode[1] == 'percent')
 #	{
@@ -288,7 +289,7 @@ stop('Impossible: cross section area too large.'); }
 #		altArea2 <- area2*100/denom;
 #		altCross <- cross.area*100/denom;
 #	}
-	
+
 #	flog.info(c(area1,area2,cross.area),name='VennDiagramLogger');
 
 	# plot scaled, generic pairwise Venn diagram with or without external texts
@@ -361,7 +362,7 @@ stop('Impossible: cross section area too large.'); }
                 ## rescaling area labels to be proportional to area
                 if(length(cex.prop) > 0){
 
-                    if(length(cex.prop) != 1){ 
+                    if(length(cex.prop) != 1){
                         flog.error('Value passed to cex.prop is not length 1',name='VennDiagramLogger')
                         stop('Value passed to cex.prop is not length 1')
 			}
@@ -381,15 +382,15 @@ stop(paste0('Unknown value passed to cex.prop: ', cex.prop))
 
                     ## rescale areas
                     areas = c(area1 - cross.area, cross.area, area2 - cross.area)
-                    maxArea = max(areas)            
-                    for(i in 1:length(areas)){                
+                    maxArea = max(areas)
+                    for(i in 1:length(areas)){
                         cex[i] = cex[i] * func(areas[i]) / func(maxArea)
                         if(cex[i] <= 0) stop(paste0('Error in rescaling of area labels: the label of area ',
                                   i, ' is less than or equal to zero'))
                     }
                 }
 
-                
+
 		# if labels are to be placed outside circles
 		if (ext.text) {
 			area.1.pos <- x.centre.1 + ifelse(!inverted, -r1 + ( (2 * r1 - (r1 + r2 - d)) / 2), -r2 + ( (2 * r2 - (r2 + r1 - d)) / 2));
